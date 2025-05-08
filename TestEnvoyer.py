@@ -1,3 +1,4 @@
+#Yislaine
 from pigpio_dht import DHT11
 import time
 import paho.mqtt.client as pmc
@@ -35,13 +36,13 @@ client.loop_start()
 try:
     while True:
     
+        # ikram
         result = sensor.read()
         if result["valid"] == True:
             
             temp = result["temp_c"]
             hum = result["humidity"]
         
-            
             #envoyer le donnes
             client.publish(TOPIC1,temp)
             print(f"Mesured Temperature: {temp}°C")

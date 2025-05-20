@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <div class="container">
+        <button id="onBtn" onclick="commande(1)">ON</button>
+        <button id="offBtn" onclick="commande(0)">OFF</button>
+         <button id="donneesBtn" onclick="afficherDonnees()">Afficher données capteur</button>
+        <div id="status"></div>
+    </div>
+
+    <script>
+        async function commande(etat) {
+            const statusDiv = document.getElementById('status');
+            try {
+                const response = await fetch('http://10.10.21.146:3000/etat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ etat: etat })
+                });
+
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    statusDiv.textContent = `Erreur: ${data.Erreur || 'Erreur inconnue'}`;
+                    statusDiv.style.color = 'red';
+                } else {
+                    statusDiv.textContent = `l’envoi de données est a : ${etat}`;
+                    statusDiv.style.color = 'green';
+                }
+            } catch (error) {
+                statusDiv.textContent = `Erreur: ${error.message}`;
+                statusDiv.style.color = 'red';
+            }
+        }
+
+        async function afficherDonnees() {
+            const statusDiv = document.getElementById('status');
+            try {
+                const response = await fetch('http://10.10.21.146:3000/donnees', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    statusDiv.textContent = `Erreur: ${data.Erreur || 'Erreur inconnue'}`;
+                    statusDiv.style.color = 'red';
+                } else {
+                    statusDiv.textContent = `Température : ${data.temp_c}°C, Humidité : ${data.humidity}%`;
+                    statusDiv.style.color = 'green';
+                }
+            } catch (error) {
+                statusDiv.textContent = `Erreur: ${error.message}`;
+                statusDiv.style.color = 'red';
+            }
+        }
+    </script>
+</body>
+</html>

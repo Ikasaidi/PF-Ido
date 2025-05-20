@@ -165,7 +165,7 @@ def reception_msg(client, userdata, msg):
     value = msg.payload.decode()
 
     try:
-        val = int(float(value))  # arrondi 
+        val = int(float(value))  # arrondi possible
     except:
         print("Valeur non valide:", value)
         return

@@ -1,0 +1,26 @@
+#
+# ===========================
+# Fichier requirements.txt
+# ===========================
+# Liste toutes les dépendances nécessaires pour exécuter le projet
+#
+
+# Lecture du capteur DHT11 via la librairie pigpio
+pigpio-dht  # pip install pigpio-dht
+
+source : https://github.com/garyns/pigpio-dht
+ 
+# Librairie MQTT pour publier/s'abonner aux messages via un broker
+paho-mqtt  # pip install paho-mqtt
+
+# Contrôle des GPIO du Raspberry Pi
+pigpio  # pip install pigpio
+
+# Librairie simple pour programmer des tâches périodiques
+schedule  # pip install schedule
+
+# API REST pour interagir avec le Raspberry Pi à distance
+flask  # pip install flask
+
+# Autoriser les requêtes entre domaines différents (pour le front-end)
+flask-cors  # pip install flask-cors
